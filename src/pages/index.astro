@@ -1,0 +1,79 @@
+---
+import "../styles/global.css";
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity Pool</title>
+    <script type="module" src="/src/pages/app.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  
+
+<header>
+    <nav class="bg-[#1E1E21] py-6 shadow-2xl">
+        <div class="px-5">
+          <div class="flex items-center justify-between">
+			<div>
+				<span class="text-xl text-amber-400"><i class="fa-solid fa-web-awesome"></i></span>
+            <a href="#" class="text-xl font-bold font-sans tracking-wide text-gray-300 pl-5">Trinity Pool</a>
+			</div>
+            <div class="hidden md:flex space-x-6">
+              <a href="#" class="text-gray-300">Inicio</a>
+              <a href="#" class="text-gray-300">Acerca de</a>
+              <a href="#" class="text-gray-300">Servicios</a>
+              <a href="#" class="text-gray-300">Contacto</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+</header>
+
+<!-- Informacion -->
+
+<div class="bg-[#3B3B41] w-screen h-auto py-12">
+  <span class="px-46 text-sm text-gray-400 font-bold cursor-default">
+    <i class="fa-solid fa-user-group"></i> 3 Amigos / &nbsp<i class="fa-solid fa-medal"></i> 100.000$ / 
+    <a class="hover:text-blue-600"  href="https://www.google.com/maps?sca_esv=50305bf398918de1&rlz=1C1ALOY_esCL954CL954&output=search&q=pool+garin&source=lnms&fbs=ABzOT_BnMAgCWdhr5zilP5f1cnRvK9uZj3HA_MTJAA6lXR8yQOHuLLuvP9rOMou0fHm-Hy8YdcIAeQoMfyv0KkoFTBhxTFZnggzilh3-eCag6WXqyjIsQabtFMQgiO0scqvzlOek7o6ppIMoZDHd2xlt3OwOuwxE8jRuWXhyZqvw7jxahyE1QkxuX9kzEUTbIYlrnMoa2MxEDY-1DyhGZnUiXxBxjPyZcw&entry=mc&ved=1t:200715&ictx=111" target="_blank">
+    <i class="fa-solid fa-location-dot"></i> Pool Garin</a> / <i class="fa-solid fa-calendar"></i> Desde 21 feb 2025
+    </span>
+
+  
+<!-- Imagenes -->
+    
+<div class="grid grid-cols-2 content-center gap-6 px-46 mt-2">
+  <div class="w-full bg-[#323236] rounded-sm flex justify-center">
+    <img src="/src/img/trio.png" class="p-6 object-cover w-full h-80 rounded-sm">
+  </div>
+  <div class="w-full bg-[#323236] rounded-sm flex justify-center">
+    <img src="/src/img/billar.jpg" class="p-6 object-cover w-full h-80 rounded-sm">
+  </div>
+</div>
+
+<!-- tabla -->
+
+<div class="flex justify-center w-auto h-full px-46 mt-8">
+<table class="w-full bg-white text-sm">
+  <thead class="uppercase text-black">
+    <tr class="bg-blue-200 text-left">
+      <th class="px-4 py-2">Fecha</th>
+      <th class="px-4 py-2">Jugador 1</th>
+      <th class="px-4 py-2">Jugador 2</th>
+      <th class="px-4 py-2">Jugador 3</th>
+      <th class="px-4 py-2">Ganador</th>
+    </tr>
+  </thead>
+  <tbody id="tablaPartidas"></tbody>
+</table>
+</div>
+
+
+</div>
+
+
+</body>
+</html>
