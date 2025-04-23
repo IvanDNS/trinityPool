@@ -1,0 +1,384 @@
+---
+import "../styles/global.css";
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity Pool</title>
+    <script type="module" src="/src/js/app-publico.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@500&display=swap" rel="stylesheet">
+  </head>
+
+<body>
+  
+
+<header>
+    <nav class="bg-[#1E1E21] py-6 shadow-2xl">
+        <div class="px-5">
+          <div class="flex items-center justify-between">
+			<div>
+				<span class="text-xl text-amber-400"><i class="fa-solid fa-web-awesome"></i></span>
+            <a href="#" class="text-xl font-bold tracking-wide text-gray-300 pl-5">Trinity Pool</a>
+			</div>
+            <div class="hidden md:flex space-x-6">
+              <a href="#" class="text-gray-300">Inicio</a>
+              <a href="#" class="text-gray-300">Acerca de</a>
+              <a href="#" class="text-gray-300">Servicios</a>
+              <audio id="miCancion" src="/src/audio/Unforgettable.mp3" preload="auto"></audio>
+              <button id="botonMusica" class="">
+                <i id="iconoMusica" class="fa-solid fa-circle-play cursor-pointer text-blue-500"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+</header>
+
+
+<!-- Informacion -->
+<div class="bg-gradient-to-br from-zinc-800 to-black bg-center h-auto py-12">
+  <span class="px-96 text-sm text-gray-400 font-bold cursor-default">
+    <i class="fa-solid fa-user-group"></i> 3 Amigos / &nbsp<i class="fa-solid fa-medal"></i> 100.000$ / 
+    <a class="hover:text-blue-600"  href="https://www.google.com/maps?sca_esv=50305bf398918de1&rlz=1C1ALOY_esCL954CL954&output=search&q=pool+garin&source=lnms&fbs=ABzOT_BnMAgCWdhr5zilP5f1cnRvK9uZj3HA_MTJAA6lXR8yQOHuLLuvP9rOMou0fHm-Hy8YdcIAeQoMfyv0KkoFTBhxTFZnggzilh3-eCag6WXqyjIsQabtFMQgiO0scqvzlOek7o6ppIMoZDHd2xlt3OwOuwxE8jRuWXhyZqvw7jxahyE1QkxuX9kzEUTbIYlrnMoa2MxEDY-1DyhGZnUiXxBxjPyZcw&entry=mc&ved=1t:200715&ictx=111" target="_blank">
+    <i class="fa-solid fa-location-dot"></i> Pool Garin</a> / <i class="fa-solid fa-calendar"></i> Desde 21 feb 2025
+    </span>
+
+  
+<!-- Imagenes -->
+    
+<div class="grid grid-cols-2 content-center gap-10 px-[20%] mt-2">
+  <div class="w-full bg-[#323236] rounded-sm flex justify-center animate-fade-right">
+    <img src="/src/img/trio.png" class="p-6 object-cover w-full h-96 rounded-sm">
+  </div>
+  <div class="w-full bg-[#323236] rounded-sm flex justify-center animate-fade-left">
+    <img src="/src/img/billar.jpg" class="p-6 object-cover w-full h-96 rounded-sm">
+  </div>
+</div>
+
+<!-- tabla -->
+
+<h1 class="text-6xl text-center mt-18 font-alfa bg-gradient-to-r from-blue-200 via-yellow-400 to-purple-800 text-transparent bg-clip-text animate-fade-down animate-delay-200">Tabla de puntuacion</h1>
+<div class="flex justify-center mt-2">
+  
+  <div class="flex justify-center px-4 mt-12">
+    <div class="overflow-x-auto rounded-xl shadow-md w-full max-w-5xl">
+      <table class="min-w-full text-sm text-left text-gray-900 animate-fade-down animate-delay-300">
+        <thead class="bg-green-500 text-white rounded-t-xl">
+          <tr>
+            <th class="px-6 py-3 rounded-tl-xl cursor-pointer" onclick="ordenarPor('fecha')">Fecha 🔽</th>
+            <th class="px-6 py-3 cursor-pointer" onclick="ordenarPor('jugador1')">Jugador 1 🔽</th>
+            <th class="px-6 py-3 cursor-pointer" onclick="ordenarPor('jugador2')">Jugador 2 🔽</th>
+            <th class="px-6 py-3 cursor-pointer" onclick="ordenarPor('jugador3')">Jugador 3 🔽</th>
+            <th class="px-6 py-3 rounded-tr-xl cursor-pointer">Ganador 🔽</th>
+          </tr>
+        </thead>
+        <tbody id="tablaPartidas" class="bg-white divide-y divide-gray-200">
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+</div>
+
+
+
+<!-- Player card -->
+<div class="max-w-7xl mx-auto p-6 grid grid-cols-3 gap-6 mt-44">
+<!-- Primer bloque -->
+<div class="relative p-6 text-center rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-700 to-black
+ h-[50vh]">
+  <img src="/src/img/ivan.png" class="h-[115%] custom-mask rounded-2xl transform translate-x-38 translate-y-[-12%] z-50 animate-wiggle animate-infinite animate-duration-[4000ms]">
+  <div class="absolute top-8 left-4 font-bebas tracking-widest text-white text-4xl font-bold drop-shadow-md">
+    <img src="/src/img/Ivanchiz.png" class="object-contain h-[63px] -mt-[10px] opacity-80">
+    <img src="/src/img/maestria.png" class="h-40 translate-y-8 animate-pulse animate-infinite animate-duration-[4000ms]">
+  </div>
+<!-- Parte inferior -->
+<div class="absolute bottom-6 left-8 w-48 space-y-1 text-white text-left font-mono opacity-85  font-raj text-lg font-bold">
+
+  <div class="bg-gray-900 bg-opacity-60 rounded-md px-3 py-1 flex justify-between items-center border-l-4 border-yellow-400 hover:-rotate-3 hover:scale-105 transition">
+    <span class="tracking-wider">Partidas</span>
+    <span class="font-semibold text-yellow-400 font-mono">18126</span>
+  </div>
+
+  <div class="bg-green-900 bg-opacity-60 rounded-md px-3 py-1 flex justify-between items-center border-l-4 border-green-400 hover:-rotate-3 hover:scale-105 transition">
+    <span class="tracking-wider">Victorias</span>
+    <span class="font-semibold text-green-400 font-mono">260</span>
+  </div>
+
+  <div class="bg-red-700 bg-opacity-60 rounded-md px-3 py-1 flex justify-between items-center border-l-4 border-red-400 hover:-rotate-3 hover:scale-105 transition">
+    <span class="tracking-wider">Derrotas</span>
+    <span class="font-semibold text-red-100 font-mono">213</span>
+  </div>
+</div>
+
+</div>
+
+
+  <!-- Segundo bloque Stats -->
+  <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-6 text-center text-white">
+    <h2 class="text-xl font-semibold mb-4">PLAYER STATS</h2>
+    <div class="grid grid-cols-2 gap-y-2">
+      <div>
+        <span class="text-sm text-zinc-400">PARTIDAS JUGADAS</span>
+        <p class="font-bold text-lg">9.08K</p>
+      </div>
+      <div>
+        <span class="text-sm text-zinc-400">PARTIDAS GANADAS</span>
+        <p class="font-bold text-lg">1.08K</p>
+      </div>
+      <div class="col-span-2 relative">
+        <div class="bg-zinc-700 rounded-full h-4">
+          <div class="bg-purple-500 rounded-full h-4" style="width: 60%;"></div>
+        </div>
+        <div class="absolute top-1/2 left-0 transform -translate-y-1/2 text-sm">464</div>
+        <div class="absolute top-1/2 right-0 transform -translate-y-1/2 text-sm">48</div>
+      </div>
+      <div>
+        <span class="text-sm text-zinc-400">BOLAS EMBOCADAS</span>
+        <p class="font-bold text-lg">5,880,801</p>
+        <span class="text-sm text-zinc-400">BOLAS 🎱 EMBOCADAS</span>
+        <p class="font-bold text-lg">5,880,801</p>
+      </div>
+      <div>
+        <span class="text-sm text-zinc-400">WIN RATE</span>
+        <p class="font-bold text-lg">21,675</p>
+        <span class="text-sm text-zinc-400">BOLAS 🎱 POR ERROR</span>
+        <p class="font-bold text-lg">5,880,801</p>
+      </div>
+      <div>
+        <span class="text-sm text-zinc-400">Partidas ausente</span>
+        <p class="font-semibold text-sm">16</p>
+      </div>
+      <div>
+        <span class="text-sm text-zinc-400">Longest Win Streak</span>
+        <p class="font-semibold text-sm">5</p>
+      </div>
+      <div>
+        <span class="text-sm text-zinc-400">Minutos en juego</span>
+        <p class="font-semibold text-sm">24,558</p>
+      </div>
+      <div>
+        <span class="text-sm text-zinc-400">Horas en juego</span>
+        <p class="font-semibold text-sm">2,224</p>
+      </div>
+      <div>
+        <span class="text-sm text-zinc-400">Dias en juego</span>
+        <p class="font-semibold text-sm">3,457</p>
+      </div>
+      <div>
+        <span class="text-sm text-zinc-400">Bolas saltarinas</span>
+        <p class="font-semibold text-sm">494</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Season 5 Stats -->
+  <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-6 text-center text-white space-y-6">
+      <!-- Fila superior: TOTAL GAMES / WINS / TOP 5 -->
+  <div class="flex justify-around text-sm text-gray-300 font-semibold">
+    <div>
+      <p class="text-xs tracking-wider">TOTAL GAMES</p>
+      <p class="text-2xl font-bold text-white">942</p>
+    </div>
+    <div>
+      <p class="text-xs tracking-wider">TOTAL WINS</p>
+      <p class="text-2xl font-bold text-white">101</p>
+    </div>
+    <div>
+      <p class="text-xs tracking-wider">TOP 5s</p>
+      <p class="text-2xl font-bold text-white">362</p>
+    </div>
+  </div>
+
+  <!-- Nivel o medalla central -->
+  <div class="flex justify-center">
+    <div class="bg-yellow-600 text-black w-16 h-16 flex items-center justify-center rounded-lg text-2xl font-bold">
+      72
+    </div>
+  </div>
+
+  <!-- Fila central: DAMAGE / KILLS -->
+  <div class="flex justify-around text-center">
+    <div>
+      <p class="text-xs text-gray-400 tracking-widest">TOTAL DAMAGE</p>
+      <p class="text-3xl font-extrabold text-white">690,601</p>
+      <p class="text-xs text-gray-400">HIGHEST <span class="font-bold text-white">3,171</span> AVG <span class="font-bold text-white">733.12</span></p>
+    </div>
+    <div>
+      <p class="text-xs text-gray-400 tracking-widest">TOTAL KILLS</p>
+      <p class="text-3xl font-extrabold text-white">2,396</p>
+      <p class="text-xs text-gray-400">DEATHS <span class="font-bold text-white">804</span> K/D <span class="font-bold text-white">2.98</span></p>
+    </div>
+  </div>
+
+  <!-- Stats extra abajo -->
+  <div class="grid grid-cols-2 gap-x-4 text-xs text-gray-300">
+    <p>Highest Kills <span class="float-right font-bold text-white">15</span></p>
+    <p>Win Streak <span class="float-right font-bold text-white">3</span></p>
+    <p>Knockdowns <span class="float-right font-bold text-white">2,745</span></p>
+    <p>Assists <span class="float-right font-bold text-white">568</span></p>
+    <p>Revived <span class="float-right font-bold text-white">237</span></p>
+    <p>Respawned <span class="float-right font-bold text-white">69</span></p>
+  </div>
+
+  </div>
+</div>
+
+
+
+<!-- Player card Fatyka-->
+<div class="max-w-7xl mx-auto p-6 grid grid-cols-3 gap-6 mt-44">
+  <!-- Primer bloque -->
+  <div class="relative p-6 text-center rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-700 to-black
+   h-[50vh]">
+    <img src="/src/img/ivan.png" class="h-[115%] custom-mask rounded-2xl transform translate-x-38 translate-y-[-12%] z-50 animate-wiggle animate-infinite animate-duration-[4000ms]">
+    <div class="absolute top-8 left-4 font-bebas tracking-widest text-white text-4xl font-bold drop-shadow-md">
+      <img src="/src/img/Ivanchiz.png" class="object-contain h-[63px] -mt-[10px] opacity-80">
+      <img src="/src/img/maestria.png" class="h-40 translate-y-8 animate-pulse animate-infinite animate-duration-[4000ms]">
+    </div>
+  <!-- Parte inferior -->
+  <div class="absolute bottom-6 left-8 w-48 space-y-1 text-white text-left font-mono opacity-85  font-raj text-lg font-bold">
+  
+    <div class="bg-gray-900 bg-opacity-60 rounded-md px-3 py-1 flex justify-between items-center border-l-4 border-yellow-400 hover:-rotate-3 hover:scale-105 transition">
+      <span class="tracking-wider">Partidas</span>
+      <span class="font-semibold text-yellow-400 font-mono">18126</span>
+    </div>
+  
+    <div class="bg-green-900 bg-opacity-60 rounded-md px-3 py-1 flex justify-between items-center border-l-4 border-green-400 hover:-rotate-3 hover:scale-105 transition">
+      <span class="tracking-wider">Victorias</span>
+      <span class="font-semibold text-green-400 font-mono">260</span>
+    </div>
+  
+    <div class="bg-red-700 bg-opacity-60 rounded-md px-3 py-1 flex justify-between items-center border-l-4 border-red-400 hover:-rotate-3 hover:scale-105 transition">
+      <span class="tracking-wider">Derrotas</span>
+      <span class="font-semibold text-red-100 font-mono">213</span>
+    </div>
+  </div>
+  
+  </div>
+  
+    <!-- Segundo bloque Stats -->
+    <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-6 text-center text-white">
+      <h2 class="text-xl font-semibold mb-4">PLAYER STATS</h2>
+      <div class="grid grid-cols-2 gap-y-2">
+        <div>
+          <span class="text-sm text-zinc-400">PARTIDAS JUGADAS</span>
+          <p class="font-bold text-lg">9.08K</p>
+        </div>
+        <div>
+          <span class="text-sm text-zinc-400">PARTIDAS GANADAS</span>
+          <p class="font-bold text-lg">1.08K</p>
+        </div>
+        <div class="col-span-2 relative">
+          <div class="bg-zinc-700 rounded-full h-4">
+            <div class="bg-purple-500 rounded-full h-4" style="width: 60%;"></div>
+          </div>
+          <div class="absolute top-1/2 left-0 transform -translate-y-1/2 text-sm">464</div>
+          <div class="absolute top-1/2 right-0 transform -translate-y-1/2 text-sm">48</div>
+        </div>
+        <div>
+          <span class="text-sm text-zinc-400">BOLAS EMBOCADAS</span>
+          <p class="font-bold text-lg">5,880,801</p>
+          <span class="text-sm text-zinc-400">BOLAS 🎱 EMBOCADAS</span>
+          <p class="font-bold text-lg">5,880,801</p>
+        </div>
+        <div>
+          <span class="text-sm text-zinc-400">WIN RATE</span>
+          <p class="font-bold text-lg">21,675</p>
+          <span class="text-sm text-zinc-400">BOLAS 🎱 POR ERROR</span>
+          <p class="font-bold text-lg">5,880,801</p>
+        </div>
+        <div>
+          <span class="text-sm text-zinc-400">Partidas ausente</span>
+          <p class="font-semibold text-sm">16</p>
+        </div>
+        <div>
+          <span class="text-sm text-zinc-400">Longest Win Streak</span>
+          <p class="font-semibold text-sm">5</p>
+        </div>
+        <div>
+          <span class="text-sm text-zinc-400">Minutos en juego</span>
+          <p class="font-semibold text-sm">24,558</p>
+        </div>
+        <div>
+          <span class="text-sm text-zinc-400">Horas en juego</span>
+          <p class="font-semibold text-sm">2,224</p>
+        </div>
+        <div>
+          <span class="text-sm text-zinc-400">Dias en juego</span>
+          <p class="font-semibold text-sm">3,457</p>
+        </div>
+        <div>
+          <span class="text-sm text-zinc-400">Bolas saltarinas</span>
+          <p class="font-semibold text-sm">494</p>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Season 5 Stats -->
+    <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-6 text-center text-white">
+      <h2 class="text-xl font-semibold mb-4">SEASON 5: FORTUNE'S FAVOR</h2>
+      <div class="grid grid-cols-2 gap-y-2">
+        <div>
+          <span class="text-sm text-zinc-400">TOTAL GAMES</span>
+          <p class="font-bold text-lg">942</p>
+        </div>
+        <div>
+          <span class="text-sm text-zinc-400">TOTAL WINS</span>
+          <p class="font-bold text-lg">101</p>
+        </div>
+        <div class="col-span-2 relative">
+          <div class="bg-zinc-700 rounded-full h-4">
+            <div class="bg-yellow-500 rounded-full h-4" style="width: 10%;"></div>
+          </div>
+          <div class="absolute top-1/2 left-0 transform -translate-y-1/2 text-sm">72</div>
+        </div>
+        <div>
+          <span class="text-sm text-zinc-400">TOTAL DAMAGE</span>
+          <p class="font-bold text-lg">690,601</p>
+          <p class="text-sm text-zinc-400">HIGHEST 3,171 | AVG 733.12</p>
+        </div>
+        <div>
+          <span class="text-sm text-zinc-400">TOTAL KILLS</span>
+          <p class="font-bold text-lg">2,396</p>
+          <p class="text-sm text-zinc-400">DEATHS 804 | K/DR 2.98</p>
+        </div>
+        <div>
+          <span class="text-sm text-zinc-400">Highest Kills</span>
+          <p class="font-semibold text-sm">15</p>
+        </div>
+        <div>
+          <span class="text-sm text-zinc-400">Longest Win Streak</span>
+          <p class="font-semibold text-sm">3</p>
+        </div>
+        <div>
+          <span class="text-sm text-zinc-400">Knockdowns</span>
+          <p class="font-semibold text-sm">2,745</p>
+        </div>
+        <div>
+          <span class="text-sm text-zinc-400">Teammates Revived</span>
+          <p class="font-semibold text-sm">237</p>
+        </div>
+        <div>
+          <span class="text-sm text-zinc-400">Assists</span>
+          <p class="font-semibold text-sm">566</p>
+        </div>
+        <div>
+          <span class="text-sm text-zinc-400">Teammates Respawned</span>
+          <p class="font-semibold text-sm">69</p>
+        </div>
+    </div>
+
+</div>
+
+
+
+</body>
+</html>
+

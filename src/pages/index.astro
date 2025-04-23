@@ -2,78 +2,443 @@
 import "../styles/global.css";
 ---
 <!DOCTYPE html>
-<html lang="es">
-<head>
+<html lang="en">
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trinity Pool</title>
-    <script type="module" src="/src/pages/app.js"></script>
+    <script type="module" src="/src/js/app-publico.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@500&display=swap" rel="stylesheet">
+  </head>
 
-<body>
-  
-
-<header>
-    <nav class="bg-[#1E1E21] py-6 shadow-2xl">
+  <body class="bg-gradient-to-b from-gray-800 to-black text-white min-h-screen">
+    <!-- Navbar -->
+    <nav class="bg-sky-300/10 backdrop-blur-3xl border-b border-gray-700 py-6 shadow-2xl">
         <div class="px-5">
           <div class="flex items-center justify-between">
 			<div>
 				<span class="text-xl text-amber-400"><i class="fa-solid fa-web-awesome"></i></span>
-            <a href="#" class="text-xl font-bold font-sans tracking-wide text-gray-300 pl-5">Trinity Pool</a>
+            <a href="#" class="text-xl font-bold tracking-wide text-gray-300 pl-5">Trinity Pool</a>
 			</div>
             <div class="hidden md:flex space-x-6">
               <a href="#" class="text-gray-300">Inicio</a>
               <a href="#" class="text-gray-300">Acerca de</a>
               <a href="#" class="text-gray-300">Servicios</a>
-              <a href="#" class="text-gray-300">Contacto</a>
+              <audio id="miCancion" src="/src/audio/Unforgettable.mp3" preload="auto"></audio>
+              <button id="botonMusica" class="">
+                <i id="iconoMusica" class="fa-solid fa-circle-play cursor-pointer text-blue-500"></i>
+              </button>
             </div>
           </div>
         </div>
       </nav>
-</header>
 
-<!-- Informacion -->
+    <!-- Texto Section -->
+    <section class="text-center px-4 mt-28">
+      <h1 class="text-5xl font-alfa leading-16 tracking-wider mt-14 animate-fade-down">
+        Registremos Cada Tiro con Precisión <br />Y  <span class="text-blue-400">Demuestra Quien Manda</span> En el Billar.
+      </h1>
+      <p class="mt-8 max-w-2xl mx-auto text-gray-400 animate-fade-down animate-delay-[200ms]">
+        Registro de victorias, rachas, tiros clave y más. Cada partida cuenta. Que las estadísticas hablen y demuestren quién es el mejor en la mesa.
+      </p>
+      <div class="h-20 flex justify-center items-center mt-6">
+        <img src="/src/img/trinity.png" class="w-28 h-auto animate-fade-down animate-delay-[400ms] hover:scale-105 transition" alt="Trinity Logo" loading="lazy">
+      </div>
+      <p class="mt-4 text-sm text-gray-400 animate-fade-down animate-delay-[600ms]">Revisa tus estadísticas, últimas partidas</p>
+    </section>
 
-<div class="bg-[#3B3B41] w-screen h-auto py-12">
-  <span class="px-46 text-sm text-gray-400 font-bold cursor-default">
-    <i class="fa-solid fa-user-group"></i> 3 Amigos / &nbsp<i class="fa-solid fa-medal"></i> 100.000$ / 
-    <a class="hover:text-blue-600"  href="https://www.google.com/maps?sca_esv=50305bf398918de1&rlz=1C1ALOY_esCL954CL954&output=search&q=pool+garin&source=lnms&fbs=ABzOT_BnMAgCWdhr5zilP5f1cnRvK9uZj3HA_MTJAA6lXR8yQOHuLLuvP9rOMou0fHm-Hy8YdcIAeQoMfyv0KkoFTBhxTFZnggzilh3-eCag6WXqyjIsQabtFMQgiO0scqvzlOek7o6ppIMoZDHd2xlt3OwOuwxE8jRuWXhyZqvw7jxahyE1QkxuX9kzEUTbIYlrnMoa2MxEDY-1DyhGZnUiXxBxjPyZcw&entry=mc&ved=1t:200715&ictx=111" target="_blank">
-    <i class="fa-solid fa-location-dot"></i> Pool Garin</a> / <i class="fa-solid fa-calendar"></i> Desde 21 feb 2025
-    </span>
 
+<!-- Main -->
+<main class="max-w-2/3 mx-auto p-4 md:p-8 animate-fade-down animate-delay-[800ms]">
+    <div class="bg-[#081D25] bg-opacity-80 rounded-2xl shadow-xl flex flex-col md:flex-row gap-3 backdrop-blur-md">
   
-<!-- Imagenes -->
+      <!-- Sidebar izq -->
+      <aside class="bg-[#0E2D39] w-full md:w-1/6 space-y-6 p-6 rounded-l-2xl">
+        <div class="text-xl font-raj font-semibold border-b border-gray-700 pb-1 mt-3">Dashboard</i></div>
+        <ul class="space-y-3 text-sm font-mono">
+            <li onclick="mostrarSeccion('historial')" class="item-menu flex items-center gap-2 p-2 bg-cyan-700 rounded-lg cursor-pointer" data-seccion="historial"><i class="fas fa-history"></i> Historial</li>
+            <li onclick="mostrarSeccion('estadisticas')" class="item-menu flex items-center gap-2 p-2 rounded-lg cursor-pointer" data-seccion="estadisticas"><i class="fas fa-chart-line"></i> Estadísticas</li>  
+            <li class="flex items-center gap-2 p-1 rounded-lg cursor-pointer"><i class="fas fa-trophy"></i> Ranking</li>
+            <li class="flex items-center gap-2 p-1 rounded-lg cursor-pointer"><i class="fas fa-star"></i> Jugador del Día</li>
+            <li class="flex items-center gap-2 p-1 rounded-lg cursor-pointer"><i class="fas fa-cogs"></i> Configuración</li>
+        </ul>
+      </aside>
+  
+      <!-- Contenedor derecho: sub-navbar + section + aside derecho -->
+      <div class="flex-1 flex flex-col">
+  
+        <!-- Sub-navbar -->
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between pt-6 px-4 rounded-tr-2xl">
+          <!-- Tabs -->
+          <div class="flex space-x-4 text-xs font-medium md:mb-0">
+            <div class="text-blue-300 cursor-default -mb-[10px] opacity-70">
+              <i class="fa-solid fa-user-group"></i> 3 Amigos / &nbsp
+              <i class="fa-solid fa-medal"></i> 100.000$ /
+              <a class="hover:text-blue-600" href="https://www.google.com/maps?..." target="_blank">
+                <i class="fa-solid fa-location-dot"></i> Pool Garin
+              </a> / <i class="fa-solid fa-calendar"></i> Desde 21 feb 2025
+            </div>
+          </div>
+  
+          <!-- Buscador -->
+          <div class="flex items-center bg-gray-700 rounded-md px-3 py-1 w-full md:w-64">
+            <i class="fas fa-search text-gray-400 mr-2"></i>
+            <input type="text" placeholder="Buscar" class="bg-transparent text-sm focus:outline-none w-full placeholder-gray-400 text-white" />
+          </div>
+        </div>
+  
+        <!-- Contenido principal + aside derecho -->
+        <div class="flex flex-col md:flex-row gap-4 p-4">
+  
+          <!-- Main Content Adaptado a Billar -->
+          <section class="flex-1">
+            <div class="rounded-lg overflow-hidden">
+              <img src="/src/img/trio.jpg" alt="Jugadores" class=" w-[100%] rounded-lg shadow mb-6">
+            </div>
+            <!-- MAIN -->
+             <!-- SECCION ESTADISTICAS -->
+            <section id="seccion-estadisticas" class="hidden animate-fade-right">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-2xl font-raj text-blue-400 opacity-80">Estadisticas Generales</h2>
+                </div>
+                <div class="bg-gray-800 rounded-lg shadow divide-y divide-gray-700">
+                      <div class="bg-gray-800 rounded-lg shadow overflow-hidden">
+                          <table class="min-w-full text-sm text-white font-raj border-collapse">
+                              <thead class="bg-gray-700 text-left text-zinc-400 uppercase text-xs tracking-widest">
+                                <tr class="bg-gray-800 text-white text-center">
+                                    <th class="px-4 py-2 font-semibold">Jugador</th>
+                                    <th class="px-4 py-2 font-semibold">Partidas<br>Jugadas</th>
+                                    <th class="px-4 py-2 font-semibold">Victorias</th>
+                                    <th class="px-4 py-2 font-semibold">Derrotas</th>
+                                    <th class="px-4 py-2 font-semibold">Winrate<br>(%)</th>
+                                </tr>
+                              </thead>
+                              <tbody id="tabla-estadisticas" class="text-center text-white bg-gray-900">
+                              </tbody>
+                          </table>
+                      </div>
+
+              </section>
+
+
+             <section  id="seccion-historial" class="animate-fade-left">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-2xl font-raj text-blue-400 opacity-80">Partidas Recientes</h2>
+              <div class="space-x-3 text-sm">
+                <button id="botonFiltroGanador" onclick="filtrarCiclicoGanador()" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1 rounded">Mostrar todos</button>
+              </div>
+            </div>
+  
+            <div class="bg-gray-800 rounded-lg shadow divide-y divide-gray-700">
+                <div class="bg-gray-800 rounded-lg shadow max-h-[880px] overflow-y-auto">
+                    <table class="min-w-full text-sm text-white font-raj">
+                        <thead class="bg-gray-700 text-left text-zinc-400 uppercase text-xs tracking-wider">
+                            <tr class="">
+                                <th class="px-4 py-2 cursor-pointer" onclick="ordenarPor('fecha')">Fecha <i class="fa-solid fa-sort text-white"></i></th>
+                                <th class="px-4 py-2">Jugador 1</i></th>
+                                <th class="px-4 py-2">Jugador 2</th>
+                                <th class="px-4 py-2">Jugador 3</th>
+                                <th class="px-4 py-2">Ganador</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaPartidas" class="divide-y divide-gray-700">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+          </section>
+  
+<!-- Aside Derecho -->
+<aside class="w-full md:w-2/5 text-white rounded-r-2xl space-y-6">
+
+    <!-- Slider Contenedor Iván-->
+    <div class="relative w-full h-96 overflow-hidden rounded-2xl">
+  
+      <!-- Vista 1: Tarjeta básica -->
+      <div id="slide-basic-ivan" class="absolute inset-0 transition-all duration-500 ease-in-out translate-x-0 opacity-100 z-10">
+        <!-- PRIMER BLOQUE -->
+        <div class="relative p-6 text-center rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-700 to-black md:h-96">
+          <img src="/src/img/ivan.png" class="h-[115%] custom-mask rounded-2xl transform translate-x-38 translate-y-[-12%] z-50 animate-wiggle animate-infinite animate-duration-[4000ms]">
+          <div class="absolute top-8 left-4 font-bebas tracking-widest text-white text-4xl font-bold drop-shadow-md">
+            <img src="/src/img/Ivanchiz.png" class="object-contain h-[63px] -mt-[10px] opacity-80">
+            <img src="/src/img/maestria.png" class="h-40 translate-y-8 animate-pulse animate-infinite animate-duration-[4000ms]">
+          </div>
+          <!-- Parte inferior -->
+          <div class="absolute bottom-6 left-8 w-48 space-y-1 text-white text-left font-mono opacity-85 font-raj text-lg font-bold">
+            <div class="bg-gray-900 bg-opacity-60 rounded-md px-3 py-1 flex justify-between items-center border-l-4 border-yellow-400 hover:-rotate-3 hover:scale-105 transition">
+              <span class="tracking-wider">Partidas</span>
+              <span class="font-semibold text-yellow-400 font-mono partidas-Ivanchiz">0</span>
+            </div>
+            <div class="bg-green-900 bg-opacity-60 rounded-md px-3 py-1 flex justify-between items-center border-l-4 border-green-400 hover:-rotate-3 hover:scale-105 transition">
+              <span class="tracking-wider">Victorias</span>
+              <span class="font-semibold text-green-400 font-mono victorias-Ivanchiz">0</span>
+            </div>
+            <div class="bg-red-700 bg-opacity-60 rounded-md px-3 py-1 flex justify-between items-center border-l-4 border-red-400 hover:-rotate-3 hover:scale-105 transition">
+              <span class="tracking-wider">Derrotas</span>
+              <span class="font-semibold text-red-100 font-mono derrotas-Ivanchiz">0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Vista 2: Stats detallados -->
+      <div id="slide-stats-ivan" class="absolute inset-0 transition-all duration-500 ease-in-out translate-x-full opacity-0 z-0">
+        <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-6 text-center text-white md:h-96">
+          <h2 class="text-xl font-semibold mb-4">PLAYER STATS IVÁNCHIZ</h2>
+          <div class="grid grid-cols-2 gap-y-2">
+            <div>
+              <span class="text-sm text-zinc-400">PARTIDAS JUGADAS</span>
+              <p class="font-bold text-lg partidas-Ivanchiz">0</p>
+            </div>
+            <div>
+              <span class="text-sm text-zinc-400">PARTIDAS GANADAS</span>
+              <p class="font-bold text-lg victorias-Ivanchiz">0</p>
+            </div>
+            <div class="col-span-2 relative">
+                <div class="bg-zinc-700 rounded-full h-4 overflow-hidden">
+                    <div class="bg-purple-500 rounded-full h-4 winrateBar-Ivanchiz" style="width: 0%; transition: width 0.5s;"></div>
+                    </div>
+                  <div class="absolute top-1/2 left-0 transform -translate-y-1/2 text-sm px-2 victorias-Ivanchiz">464</div>
+                  <div class="absolute top-1/2 right-0 transform -translate-y-1/2 text-sm px-2 derrotas-Ivanchiz">48</div>
+            </div>
+            <div>
+              <span class="text-sm text-zinc-400">BOLAS EMBOCADAS</span>
+              <p class="font-bold text-lg bolasEmbocadas-Ivanchiz">0</p>
+              <span class="text-sm text-zinc-400">BOLAS 🎱 EMBOCADAS</span>
+              <p class="font-bold text-lg">-</p>
+            </div>
+            <div>
+              <span class="text-sm text-zinc-400">WIN RATE</span>
+              <p class="font-bold text-lg winrate-Ivanchiz">21,675</p>
+              <span class="text-sm text-zinc-400">BOLAS 🎱 POR ERROR</span>
+              <p class="font-bold text-lg">-</p>
+            </div>
+            <div>
+              <span class="text-sm text-zinc-400">Partidas ausente</span>
+              <p class="font-semibold text-sm ausencias-Ivanchiz">16</p>
+            </div>
+            <div>
+              <span class="text-sm text-zinc-400">Longest Win Streak</span>
+              <p class="font-semibold text-sm racha-Ivanchiz">0</p>
+            </div>
+            <div>
+              <span class="text-sm text-zinc-400">Minutos en juego</span>
+              <p class="font-semibold text-sm minutos-Ivanchiz">0</p>
+            </div>
+            <div>
+              <span class="text-sm text-zinc-400">Horas en juego</span>
+              <p class="font-semibold text-sm horas-Ivanchiz">0</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Flechas de navegación -->
+      <button id="toggle-arrow-ivan" onclick="toggleSlide('ivan')" class="absolute top-4 right-4 z-10 text-white hover:scale-110 transition">
+        <i class="fa-solid fa-arrow-right text-xl"></i>
+      </button>
+
+    </div>
+
+    <!-- Slider Contenedor Fatyka-->
+    <div class="relative w-full h-96 overflow-hidden rounded-2xl">
+  
+        <!-- Vista 1: Tarjeta básica -->
+        <div id="slide-basic-fatyka" class="absolute inset-0 transition-all duration-500 ease-in-out translate-x-0 opacity-100 z-10">
+          <!-- PRIMER BLOQUE -->
+          <div class="relative p-6 text-center rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-700 to-black md:h-96">
+            <img src="/src/img/fatyka.png" class="h-[115%] custom-mask rounded-2xl transform translate-x-38 translate-y-[-10%] z-50 animate-wiggle animate-infinite animate-duration-[4000ms]">
+            <div class="absolute top-8 left-4 font-bebas tracking-widest text-white text-4xl font-bold drop-shadow-md">
+              <img src="/src/img/fatykaline.png" class="object-contain h-[50px] -mt-[10px] opacity-80">
+              <img src="/src/img/maestria.png" class="h-40 translate-y-8 animate-pulse animate-infinite animate-duration-[4000ms]">
+            </div>
+            <!-- Parte inferior -->
+            <div class="absolute bottom-6 left-8 w-48 space-y-1 text-white text-left font-mono opacity-85 font-raj text-lg font-bold">
+              <div class="bg-gray-900 bg-opacity-60 rounded-md px-3 py-1 flex justify-between items-center border-l-4 border-yellow-400 hover:-rotate-3 hover:scale-105 transition">
+                <span class="tracking-wider">Partidas</span>
+                <span class="font-semibold text-yellow-400 font-mono partidas-Fatyka">0</span>
+              </div>
+              <div class="bg-green-900 bg-opacity-60 rounded-md px-3 py-1 flex justify-between items-center border-l-4 border-green-400 hover:-rotate-3 hover:scale-105 transition">
+                <span class="tracking-wider">Victorias</span>
+                <span class="font-semibold text-green-400 font-mono victorias-Fatyka">0</span>
+              </div>
+              <div class="bg-red-700 bg-opacity-60 rounded-md px-3 py-1 flex justify-between items-center border-l-4 border-red-400 hover:-rotate-3 hover:scale-105 transition">
+                <span class="tracking-wider">Derrotas</span>
+                <span class="font-semibold text-red-100 font-mono derrotas-Fatyka">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
     
-<div class="grid grid-cols-2 content-center gap-6 px-46 mt-2">
-  <div class="w-full bg-[#323236] rounded-sm flex justify-center">
-    <img src="/src/img/trio.png" class="p-6 object-cover w-full h-80 rounded-sm">
-  </div>
-  <div class="w-full bg-[#323236] rounded-sm flex justify-center">
-    <img src="/src/img/billar.jpg" class="p-6 object-cover w-full h-80 rounded-sm">
-  </div>
-</div>
+        <!-- Vista 2: Stats detallados -->
+        <div id="slide-stats-fatyka" class="absolute inset-0 transition-all duration-500 ease-in-out translate-x-full opacity-0 z-0">
+          <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-6 text-center text-white md:h-96">
+            <h2 class="text-xl font-semibold mb-4">PLAYER STATS</h2>
+            <div class="grid grid-cols-2 gap-y-2">
+              <div>
+                <span class="text-sm text-zinc-400">PARTIDAS JUGADAS</span>
+                <p class="font-bold text-lg partidas-Fatyka">0</p>
+              </div>
+              <div>
+                <span class="text-sm text-zinc-400">PARTIDAS GANADAS</span>
+                <p class="font-bold text-lg victorias-Fatyka">0</p>
+              </div>
+              <div class="col-span-2 relative">
+                <div class="bg-zinc-700 rounded-full h-4">
+                  <div class="bg-purple-500 rounded-full h-4 winrateBar-Fatyka" style="width: 0%; transition: width 0.5s;"></div>
+                </div>
+                <div class="absolute top-1/2 left-0 transform -translate-y-1/2 text-sm px-2 victorias-Fatyka"></div>
+                <div class="absolute top-1/2 right-0 transform -translate-y-1/2 text-sm px-2 derrotas-Fatyka"></div>
+              </div>
+              <div>
+                <span class="text-sm text-zinc-400">BOLAS EMBOCADAS</span>
+                <p class="font-bold text-lg bolasEmbocadas-Fatyka">0</p>
+                <span class="text-sm text-zinc-400">BOLAS 🎱 EMBOCADAS</span>
+                <p class="font-bold text-lg">-</p>
+              </div>
+              <div>
+                <span class="text-sm text-zinc-400">WIN RATE</span>
+                <p class="font-bold text-lg winrate-Fatyka">0</p>
+                <span class="text-sm text-zinc-400">BOLAS 🎱 POR ERROR</span>
+                <p class="font-bold text-lg">-</p>
+              </div>
+              <div>
+                <span class="text-sm text-zinc-400">Partidas ausente</span>
+                <p class="font-semibold text-sm ausencias-Fatyka">0</p>
+              </div>
+              <div>
+                <span class="text-sm text-zinc-400">Longest Win Streak</span>
+                <p class="font-semibold text-sm racha-Fatyka">0</p>
+              </div>
+              <div>
+                <span class="text-sm text-zinc-400">Minutos en juego</span>
+                <p class="font-semibold text-sm minutos-Fatyka">0</p>
+              </div>
+              <div>
+                <span class="text-sm text-zinc-400">Horas en juego</span>
+                <p class="font-semibold text-sm horas-Fatyka">0</p>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Flechas de navegación -->
+        <button id="toggle-arrow-fatyka" onclick="toggleSlide('fatyka')" class="absolute top-4 right-4 z-10 text-white hover:scale-110 transition">
+          <i class="fa-solid fa-arrow-right text-xl"></i>
+        </button>
+  
+      </div>
 
-<!-- tabla -->
+          <!-- Slider Contenedor Fatyka-->
+    <div class="relative w-full h-96 overflow-hidden rounded-2xl">
+  
+        <!-- Vista 1: Tarjeta básica YURI -->
+        <div id="slide-basic-yuri" class="absolute inset-0 transition-all duration-500 ease-in-out translate-x-0 opacity-100 z-10">
+          <!-- PRIMER BLOQUE -->
+          <div class="relative p-6 text-center rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-700 to-black md:h-96">
+            <img src="/src/img/yuri.png" class="h-[110%] custom-mask rounded-2xl transform translate-x-38 translate-y-[-3%] z-50 animate-wiggle animate-infinite animate-duration-[4000ms]">
+            <div class="absolute top-8 left-4 font-bebas tracking-widest text-white text-4xl font-bold drop-shadow-md">
+              <h1 class="font-bebas font-bold">Yuri</h1>
+              <img src="/src/img/maestria.png" class="h-40 translate-y-8 animate-pulse animate-infinite animate-duration-[4000ms]">
+            </div>
+            <!-- Parte inferior -->
+            <div class="absolute bottom-6 left-8 w-48 space-y-1 text-white text-left font-mono opacity-85 font-raj text-lg font-bold">
+              <div class="bg-gray-900 bg-opacity-60 rounded-md px-3 py-1 flex justify-between items-center border-l-4 border-yellow-400 hover:-rotate-3 hover:scale-105 transition">
+                <span class="tracking-wider">Partidas</span>
+                <span class="font-semibold text-yellow-400 font-mono partidas-Yuri">0</span>
+              </div>
+              <div class="bg-green-900 bg-opacity-60 rounded-md px-3 py-1 flex justify-between items-center border-l-4 border-green-400 hover:-rotate-3 hover:scale-105 transition">
+                <span class="tracking-wider">Victorias</span>
+                <span class="font-semibold text-green-400 font-mono victorias-Yuri">0</span>
+              </div>
+              <div class="bg-red-700 bg-opacity-60 rounded-md px-3 py-1 flex justify-between items-center border-l-4 border-red-400 hover:-rotate-3 hover:scale-105 transition">
+                <span class="tracking-wider">Derrotas</span>
+                <span class="font-semibold text-red-100 font-mono derrotas-Yuri">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Vista 2: Stats detallados -->
+        <div id="slide-stats-yuri" class="absolute inset-0 transition-all duration-500 ease-in-out translate-x-full opacity-0 z-0">
+          <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-6 text-center text-white md:h-96">
+            <h2 class="text-xl font-semibold mb-4">PLAYER STATS YURI</h2>
+            <div class="grid grid-cols-2 gap-y-2">
+              <div>
+                <span class="text-sm text-zinc-400">PARTIDAS JUGADAS</span>
+                <p class="font-bold text-lg partidas-Yuri">0</p>
+              </div>
+              <div>
+                <span class="text-sm text-zinc-400">PARTIDAS GANADAS</span>
+                <p class="font-bold text-lg victorias-Yuri">0</p>
+              </div>
+              <div class="col-span-2 relative">
+                <div class="bg-zinc-700 rounded-full h-4">
+                  <div class="bg-purple-500 rounded-full h-4 winrateBar-Yuri" style="width: 0%; transition: width 0.5s;"></div>
+                </div>
+                <div class="absolute top-1/2 left-0 transform -translate-y-1/2 text-sm px-2 victorias-Yuri">0</div>
+                <div class="absolute top-1/2 right-0 transform -translate-y-1/2 text-sm px-2 derrotas-Yuri">0</div>
+              </div>
+              <div>
+                <span class="text-sm text-zinc-400">BOLAS EMBOCADAS</span>
+                <p class="font-bold text-lg bolasEmbocadas-Yuri">0</p>
+                <span class="text-sm text-zinc-400">BOLAS 🎱 EMBOCADAS</span>
+                <p class="font-bold text-lg">-</p>
+              </div>
+              <div>
+                <span class="text-sm text-zinc-400">WIN RATE</span>
+                <p class="font-bold text-lg winrate-Yuri">0</p>
+                <span class="text-sm text-zinc-400">BOLAS 🎱 POR ERROR</span>
+                <p class="font-bold text-lg">-</p>
+              </div>
+              <div>
+                <span class="text-sm text-zinc-400">Partidas ausente</span>
+                <p class="font-semibold text-sm ausencias-Yuri">0</p>
+              </div>
+              <div>
+                <span class="text-sm text-zinc-400">Longest Win Streak</span>
+                <p class="font-semibold text-sm racha-Yuri">0</p>
+              </div>
+              <div>
+                <span class="text-sm text-zinc-400">Minutos en juego</span>
+                <p class="font-semibold text-sm minutos-Yuri">0</p>
+              </div>
+              <div>
+                <span class="text-sm text-zinc-400">Horas en juego</span>
+                <p class="font-semibold text-sm horas-Yuri">0</p>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Flechas de navegación -->
+        <button id="toggle-arrow-yuri" onclick="toggleSlide('yuri')" class="absolute top-4 right-4 z-10 text-white hover:scale-110 transition">
+          <i class="fa-solid fa-arrow-right text-xl"></i>
+        </button>
+  
+      </div>
 
-<div class="flex justify-center w-auto h-full px-46 mt-8">
-<table class="w-full bg-white text-sm">
-  <thead class="uppercase text-black">
-    <tr class="bg-blue-200 text-left">
-      <th class="px-4 py-2">Fecha</th>
-      <th class="px-4 py-2">Jugador 1</th>
-      <th class="px-4 py-2">Jugador 2</th>
-      <th class="px-4 py-2">Jugador 3</th>
-      <th class="px-4 py-2">Ganador</th>
-    </tr>
-  </thead>
-  <tbody id="tablaPartidas"></tbody>
-</table>
-</div>
 
 
-</div>
-
-
-</body>
+  </aside>
+  
+  
+    </div>
+  
+      </div>
+  
+    </div>
+  
+    <!-- Footer -->
+    <p class="text-center text-sm text-gray-400 mt-8">Hecho para los que se toman el billar entre amigos.</p>
+  </main>
+  
+  
+  </body>
+  
 </html>

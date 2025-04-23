@@ -1,6 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Anton&family=Bebas+Neue&family=Special+Gothic+Expanded+One&display=swap');
 @import "tailwindcss";
-.alfa-slab-one-regular {
-    font-family: "Pool", serif;
-    font-weight: 400;
-    font-style: normal;
+@import "tailwindcss-animated";
+
+
+
+.font-alfa {
+  font-family: 'Alfa Slab One', serif;
+}
+.font-bebas {
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+.font-raj {
+  font-family: 'Rajdhani', sans-serif;
+}
+
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+  .custom-mask {
+    -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
   }
