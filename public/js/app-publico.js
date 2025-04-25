@@ -20,7 +20,7 @@ const db = getDatabase(app);
 const partidasRef = ref(db, "partidas");
 
 let partidas = [];
-let partidasVisibles = []; // 👈 importante
+let partidasVisibles = [];
 let estadoOrden = {};
 
 onValue(partidasRef, (snapshot) => {
@@ -29,7 +29,7 @@ onValue(partidasRef, (snapshot) => {
 
   if (data) {
     partidas = Object.values(data);
-    partidasVisibles = [...partidas]; 
+    partidas.reverse();
   }
 
   renderizarPartidas(partidas);
@@ -40,44 +40,69 @@ function renderizarPartidas(lista) {
   if (!tbody) return;
 
   tbody.innerHTML = "";
-  lista.forEach((row) => {
+
+  lista.forEach((row, index) => {
+
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td class="px-4 py-2">${row.fecha}</td>
       <td class="px-4 py-2">${row.jugador1 ?? "-----"}</td>
       <td class="px-4 py-2">${row.jugador2 ?? "-----"}</td>
       <td class="px-4 py-2">${row.jugador3 ?? "-----"}</td>
-      <td class="px-4 py-2 font-bold">${row.ganador}</td>
+      <td class="px-4 py-2 font-bold text-center${
+        row.ganador === 'Ivánchiz'
+          ? ' text-yellow-400'
+          : row.ganador === 'Fatyka'
+          ? ' text-green-400'
+          : row.ganador === 'Yuri'
+          ? ' text-purple-400'
+          : ''
+      }">${row.ganador}</td>
     `;
     tbody.appendChild(tr);
   });
 }
 
 //Cambiar Seccion del main
-window.mostrarSeccion = (seccion) => {
-  const historial = document.getElementById("seccion-historial");
-  const estadisticas = document.getElementById("seccion-estadisticas");
+window.mostrarSeccion = function(id) {
+  // Mostrar sección inferior
+  const secciones = document.querySelectorAll('[id^="seccion-"]');
+  secciones.forEach(sec => sec.classList.add("hidden"));
+  const activa = document.getElementById(`seccion-${id}`);
+  if (activa) activa.classList.remove("hidden");
 
-  if (!historial || !estadisticas) return;
+  // Restaurar sección superior 1
+  const superiores = document.querySelectorAll('[id^="seccionSuperior"]');
+  superiores.forEach(s => s.classList.add("hidden"));
+  const superior1 = document.getElementById("seccionSuperior1");
+  if (superior1) superior1.classList.remove("hidden");
 
-  if (seccion === "estadisticas") {
-    historial.classList.add("hidden");
-    estadisticas.classList.remove("hidden");
-  } else if (seccion === "historial") {
-    estadisticas.classList.add("hidden");
-    historial.classList.remove("hidden");
-  }
+  // Estilo visual en menú
+  document.querySelectorAll(".item-menu").forEach(el => {
+    el.classList.remove("bg-[#04D7FF]");
+  });
 
-    // Cambiar estilo activo del menú
-    document.querySelectorAll('.item-menu').forEach(el => {
-      if (el.dataset.seccion === seccion) {
-        el.classList.add('bg-cyan-700');
-      } else {
-        el.classList.remove('bg-cyan-700');
-      }
-    });
-
+  const activo = document.querySelector(`[data-seccion="${id}"]`);
+  if (activo) activo.classList.add("bg-[#04D7FF]");
 };
+
+
+window.cambiarSeccionSuperior = function(id, elemento) {
+  const secciones = document.querySelectorAll('[id^="seccionSuperior"]');
+  secciones.forEach(sec => sec.classList.add("hidden"));
+
+  const activa = document.getElementById(id);
+  if (activa) activa.classList.remove("hidden");
+
+  document.querySelectorAll(".item-menu").forEach(el => {
+    el.classList.remove("bg-[#04D7FF]");
+  });
+
+  if (elemento) {
+    elemento.classList.add("bg-[#04D7FF]");
+  }
+};
+
 
 
 
@@ -238,6 +263,7 @@ function calcularRachaMaxima(jugador) {
 
   return rachaMaxima;
 }
+
 
 
 // ------------------------------

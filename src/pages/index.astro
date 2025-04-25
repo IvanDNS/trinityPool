@@ -54,22 +54,23 @@ import "../styles/global.css";
 
 <!-- Main -->
 <main class="max-w-2/3 mx-auto p-4 md:p-8 animate-fade-down animate-delay-[800ms]">
-    <div class="bg-[#081D25] bg-opacity-80 rounded-2xl shadow-xl flex flex-col md:flex-row gap-3 backdrop-blur-md">
+    <div class="bg-[#081D25] bg-opacity-80 rounded-2xl shadow-xl flex flex-col md:flex-row backdrop-blur-md">
   
       <!-- Sidebar izq -->
       <aside class="bg-[#0E2D39] w-full md:w-1/6 space-y-6 p-6 rounded-l-2xl">
         <div class="text-xl font-raj font-semibold border-b border-gray-700 pb-1 mt-3">Dashboard</i></div>
         <ul class="space-y-3 text-sm font-mono">
-            <li onclick="mostrarSeccion('historial')" class="item-menu flex items-center gap-2 p-2 bg-cyan-700 rounded-lg cursor-pointer" data-seccion="historial"><i class="fas fa-history"></i> Historial</li>
+            <li onclick="mostrarSeccion('historial')" class="item-menu flex items-center gap-2 p-2 bg-[#04D7FF] rounded-lg cursor-pointer" data-seccion="historial"><i class="fas fa-history"></i> Historial</li>
             <li onclick="mostrarSeccion('estadisticas')" class="item-menu flex items-center gap-2 p-2 rounded-lg cursor-pointer" data-seccion="estadisticas"><i class="fas fa-chart-line"></i> Estadísticas</li>  
-            <li class="flex items-center gap-2 p-1 rounded-lg cursor-pointer"><i class="fas fa-trophy"></i> Ranking</li>
-            <li class="flex items-center gap-2 p-1 rounded-lg cursor-pointer"><i class="fas fa-star"></i> Jugador del Día</li>
+            <li onclick="cambiarSeccionSuperior('seccionSuperior2', this)" class="item-menu flex items-center gap-2 p-2 rounded-lg cursor-pointer tracking-tighter"><i class="fas fa-star"></i> Hall de la fama</li>
+            <li class="flex items-center gap-2 p-1 rounded-lg cursor-pointer"><i class="fas fa-trophy"></i> Galeria</li>
             <li class="flex items-center gap-2 p-1 rounded-lg cursor-pointer"><i class="fas fa-cogs"></i> Configuración</li>
         </ul>
       </aside>
   
       <!-- Contenedor derecho: sub-navbar + section + aside derecho -->
-      <div class="flex-1 flex flex-col">
+      
+      <div id="seccionSuperior1" class="flex-1 flex flex-col animate-fade-right">
   
         <!-- Sub-navbar -->
         <div class="flex flex-col md:flex-row md:items-center md:justify-between pt-6 px-4 rounded-tr-2xl">
@@ -78,7 +79,7 @@ import "../styles/global.css";
             <div class="text-blue-300 cursor-default -mb-[10px] opacity-70">
               <i class="fa-solid fa-user-group"></i> 3 Amigos / &nbsp
               <i class="fa-solid fa-medal"></i> 100.000$ /
-              <a class="hover:text-blue-600" href="https://www.google.com/maps?..." target="_blank">
+              <a class="hover:text-blue-600" href="https://maps.app.goo.gl/wHbsrdkbsZugqsuP6" target="_blank">
                 <i class="fa-solid fa-location-dot"></i> Pool Garin
               </a> / <i class="fa-solid fa-calendar"></i> Desde 21 feb 2025
             </div>
@@ -114,7 +115,7 @@ import "../styles/global.css";
                                     <th class="px-4 py-2 font-semibold">Partidas<br>Jugadas</th>
                                     <th class="px-4 py-2 font-semibold">Victorias</th>
                                     <th class="px-4 py-2 font-semibold">Derrotas</th>
-                                    <th class="px-4 py-2 font-semibold">Winrate<br>(%)</th>
+                                    <th class="px-4 py-2 font-semibold">Winrate</th>
                                 </tr>
                               </thead>
                               <tbody id="tabla-estadisticas" class="text-center text-white bg-gray-900">
@@ -125,7 +126,7 @@ import "../styles/global.css";
               </section>
 
 
-             <section  id="seccion-historial" class="animate-fade-left">
+             <section  id="seccion-historial" class="animate-fade-right">
             <div class="flex items-center justify-between mb-4">
               <h2 class="text-2xl font-raj text-blue-400 opacity-80">Partidas Recientes</h2>
               <div class="space-x-3 text-sm">
@@ -278,7 +279,7 @@ import "../styles/global.css";
         <!-- Vista 2: Stats detallados -->
         <div id="slide-stats-fatyka" class="absolute inset-0 transition-all duration-500 ease-in-out translate-x-full opacity-0 z-0">
           <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-6 text-center text-white md:h-96">
-            <h2 class="text-xl font-semibold mb-4">PLAYER STATS</h2>
+            <h2 class="text-xl font-semibold mb-4">PLAYER STATS FATYKA</h2>
             <div class="grid grid-cols-2 gap-y-2">
               <div>
                 <span class="text-sm text-zinc-400">PARTIDAS JUGADAS</span>
@@ -340,7 +341,7 @@ import "../styles/global.css";
         <div id="slide-basic-yuri" class="absolute inset-0 transition-all duration-500 ease-in-out translate-x-0 opacity-100 z-10">
           <!-- PRIMER BLOQUE -->
           <div class="relative p-6 text-center rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-700 to-black md:h-96">
-            <img src="/img/yuri.png" class="h-[110%] w-[82%] custom-mask rounded-2xl transform translate-x-38 translate-y-[-3%] z-50 animate-wiggle animate-infinite animate-duration-[4000ms]">
+            <img src="/img/yuri.png" class="h-[110%] custom-mask rounded-2xl transform translate-x-38 translate-y-[-3%] z-50 animate-wiggle animate-infinite animate-duration-[4000ms]">
             <div class="absolute top-8 left-4 font-bebas tracking-widest text-white text-4xl font-bold drop-shadow-md">
               <h1 class="font-bebas font-bold">Yuri</h1>
               <img src="/img/maestria.png" class="h-40 translate-y-8 animate-pulse animate-infinite animate-duration-[4000ms]">
@@ -425,11 +426,39 @@ import "../styles/global.css";
 
 
   </aside>
-  
-  
     </div>
-  
       </div>
+
+      <section id="seccionSuperior2" class="hidden animate-fade-right flex-1 h-[1100px] relative p-8 overflow-hidden">
+
+        <!-- Contenedor general con imagen de fondo sin opacidad -->
+        <div class="relative group w-full h-80 bg-[url('/img/billar.png')] bg-cover bg-center rounded-lg overflow-hidden">
+          
+          <!-- Overlay de opacidad para oscurecer solo la imagen de fondo -->
+          <div class="absolute inset-0 bg-black opacity-40 z-0"></div>
+      
+          <!-- Imagen del taco animado -->
+          <img
+            src="/img/taco.png"
+            alt="Taco"
+            class="absolute top-0 right-0 h-[40%] opacity-60 -rotate-12 translate-x-[150%] translate-y-[-150%] transition-all duration-700 ease-out group-hover:translate-x-[320px] group-hover:translate-y-[0px] z-10"
+          />
+      
+          <!-- Contenido Hall de la Fama -->
+          <div class="relative z-20 flex items-center justify-end h-full">
+            <h2 class="text-5xl font-Croissant text-white drop-shadow text-end pr-16 translate-y-14">
+              🏆 Hall de la <span class="text-yellow-400">Fama</span>
+            </h2>
+          </div>
+      
+        </div>
+      
+      </section>
+      
+      
+      
+      
+      
   
     </div>
   

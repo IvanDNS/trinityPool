@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Anton&family=Bebas+Neue&family=Special+Gothic+Expanded+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Croissant+One&display=swap');
 @import "tailwindcss";
 @import "tailwindcss-animated";
 
@@ -14,6 +15,9 @@
 
 .font-raj {
   font-family: 'Rajdhani', sans-serif;
+}
+.font-Croissant {
+  font-family: "Croissant One", serif;
 }
 
 
