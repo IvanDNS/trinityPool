@@ -62,8 +62,9 @@ import "../styles/global.css";
         <ul class="space-y-3 text-sm font-mono">
             <li onclick="mostrarSeccion('historial')" class="item-menu flex items-center gap-2 p-2 bg-[#04D7FF] rounded-lg cursor-pointer" data-seccion="historial"><i class="fas fa-history"></i> Historial</li>
             <li onclick="mostrarSeccion('estadisticas')" class="item-menu flex items-center gap-2 p-2 rounded-lg cursor-pointer" data-seccion="estadisticas"><i class="fas fa-chart-line"></i> Estadísticas</li>  
-            <li onclick="cambiarSeccionSuperior('seccionSuperior2', this)" class="item-menu flex items-center gap-2 p-2 rounded-lg cursor-pointer tracking-tighter"><i class="fas fa-star"></i> Hall de la fama</li>
-            <li class="flex items-center gap-2 p-1 rounded-lg cursor-pointer"><i class="fas fa-trophy"></i> Galeria</li>
+            <li class="flex items-center gap-2 p-1 rounded-lg cursor-pointer"><i class="fas fa-camera"></i> Galeria</li>
+            <li onclick="cambiarSeccionSuperior('seccionSuperior2', this)" class="item-menu flex items-center gap-2 p-2 rounded-lg cursor-pointer tracking-tighter"><i class="fas fa-trophy"></i> Hall de la fama</li>
+
             <li class="flex items-center gap-2 p-1 rounded-lg cursor-pointer"><i class="fas fa-cogs"></i> Configuración</li>
         </ul>
       </aside>
@@ -436,7 +437,7 @@ import "../styles/global.css";
           <img
             src="/img/taco.png"
             alt="Taco"
-            class="absolute top-0 right-0 h-[40%] opacity-60 -rotate-12 translate-x-[150%] translate-y-[-150%] transition-all duration-700 ease-out group-hover:translate-x-[320px] group-hover:translate-y-[0px] z-10"
+            class="absolute top-0 right-0 h-[40%] opacity-60 -rotate-12 translate-x-[150%] translate-y-[-150%] transition-all duration-700 ease-out group-hover:translate-x-[320px] group-hover:translate-y-[0px] z-10 animate-shake animate-infinite animate-duration-[1500ms]"
           />
           
           <!-- Contenido Hall de la Fama -->
