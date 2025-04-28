@@ -28,12 +28,36 @@ onValue(partidasRef, (snapshot) => {
   partidas = [];
 
   if (data) {
-    partidas = Object.values(data);
-    partidas.reverse();
+    partidas = Object.entries(data)
+      .map(([id, p]) => ({ ...p, id })) // <-- añadimos la key como campo "id"
+      .sort((a, b) => b.id.localeCompare(a.id));
   }
 
-  renderizarPartidas(partidas);
+  partidasVisibles = [...partidas];
+  renderizarPartidas(partidasVisibles);
+
+// ganadorPorMes
+const resultados = ganadorPorMesSeparado(partidas);
+
+resultados.forEach(({ mes, anio, ganador, victorias }) => {
+  console.log(`Mes: ${mes}, Año: ${anio}, Ganador: ${ganador}, Victorias: ${victorias}`);
+
+  // Si quieres modificar el HTML
+  const img = document.getElementById(`trofeo-${mes}-${anio}`);
+  if (img) {
+    const nombre = ganador.toLowerCase().replace(/\s/g, "");
+    img.src = `/img/trofeo/trofeo-${nombre}.png`;
+  }
+
+  const victoriasEl = document.getElementById(`victorias-${mes}-${anio}`);
+  if (victoriasEl) {
+    victoriasEl.textContent = `${ganador} ganó ${victorias} veces`;
+  }
 });
+
+
+});
+
 
 function renderizarPartidas(lista) {
   const tbody = document.getElementById("tablaPartidas");
@@ -41,11 +65,10 @@ function renderizarPartidas(lista) {
 
   tbody.innerHTML = "";
 
-  lista.forEach((row, index) => {
-
+  lista.forEach((row) => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td class="px-4 py-2">${row.fecha}</td>
+      <td class="px-4 py-2">${formatearFecha(row.fecha)}</td>
       <td class="px-4 py-2">${row.jugador1 ?? "-----"}</td>
       <td class="px-4 py-2">${row.jugador2 ?? "-----"}</td>
       <td class="px-4 py-2">${row.jugador3 ?? "-----"}</td>
@@ -63,47 +86,32 @@ function renderizarPartidas(lista) {
   });
 }
 
-//Cambiar Seccion del main
-window.mostrarSeccion = function(id) {
-  // Mostrar sección inferior
-  const secciones = document.querySelectorAll('[id^="seccion-"]');
-  secciones.forEach(sec => sec.classList.add("hidden"));
-  const activa = document.getElementById(`seccion-${id}`);
-  if (activa) activa.classList.remove("hidden");
+//Formatear fecha
+function formatearFecha(fechaISO) {
+  if (!fechaISO) return "";
 
-  // Restaurar sección superior 1
-  const superiores = document.querySelectorAll('[id^="seccionSuperior"]');
-  superiores.forEach(s => s.classList.add("hidden"));
-  const superior1 = document.getElementById("seccionSuperior1");
-  if (superior1) superior1.classList.remove("hidden");
+  const fecha = new Date(fechaISO);
+  const dia = String(fecha.getDate()).padStart(2, "0");
+  const mes = String(fecha.getMonth() + 1).padStart(2, "0");
+  const anio = fecha.getFullYear();
 
-  // Estilo visual en menú
-  document.querySelectorAll(".item-menu").forEach(el => {
-    el.classList.remove("bg-[#04D7FF]");
+  return `${dia}/${mes}/${anio}`;
+}
+
+// ------------------------------
+// ORDENAR TABLA
+// ------------------------------
+window.ordenarPor = (campo) => {
+  const asc = !estadoOrden[campo];
+  estadoOrden[campo] = asc;
+
+  // Ordenamos por id, ignorando campo
+  partidasVisibles.sort((a, b) => {
+    return asc ? a.id.localeCompare(b.id) : b.id.localeCompare(a.id);
   });
 
-  const activo = document.querySelector(`[data-seccion="${id}"]`);
-  if (activo) activo.classList.add("bg-[#04D7FF]");
+  renderizarPartidas(partidasVisibles);
 };
-
-
-window.cambiarSeccionSuperior = function(id, elemento) {
-  const secciones = document.querySelectorAll('[id^="seccionSuperior"]');
-  secciones.forEach(sec => sec.classList.add("hidden"));
-
-  const activa = document.getElementById(id);
-  if (activa) activa.classList.remove("hidden");
-
-  document.querySelectorAll(".item-menu").forEach(el => {
-    el.classList.remove("bg-[#04D7FF]");
-  });
-
-  if (elemento) {
-    elemento.classList.add("bg-[#04D7FF]");
-  }
-};
-
-
 
 
 //Contar ausencias
@@ -115,31 +123,10 @@ function contarAusencias(nombreJugador) {
   ).length;
 }
 
+
 // ------------------------------
-// ORDENAR TABLA
+// FILTRAR GANADORES
 // ------------------------------
-window.ordenarPor = (campo) => {
-  const asc = !estadoOrden[campo];
-  estadoOrden[campo] = asc;
-
-  partidasVisibles.sort((a, b) => {
-    const valA = (a[campo] || "").toLowerCase?.() || "";
-    const valB = (b[campo] || "").toLowerCase?.() || "";
-
-    const esNuloA = !a[campo];
-    const esNuloB = !b[campo];
-
-    if (esNuloA && !esNuloB) return asc ? 1 : -1;
-    if (!esNuloA && esNuloB) return asc ? -1 : 1;
-    if (valA < valB) return asc ? -1 : 1;
-    if (valA > valB) return asc ? 1 : -1;
-    return 0;
-  });
-
-  renderizarPartidas(partidasVisibles);
-};
-
-// filtrar ganadores
 const ganadores = ["Ivánchiz", "Fatyka", "Yuri", "Todos"];
 let indexGanador = 0;
 window.filtrarCiclicoGanador = () => {
@@ -264,6 +251,110 @@ function calcularRachaMaxima(jugador) {
   return rachaMaxima;
 }
 
+// ------------------------------
+// HALL DE LA FAMA, CONTAR VICTORIAS POR MES Y MOSTRAR
+// ------------------------------
+function ganadorPorMesSeparado(lista) {
+  const contador = {};
+
+  lista.forEach((partida) => {
+    if (!partida.fecha || !partida.ganador) return;
+
+    const fecha = new Date(partida.fecha);
+    const mes = fecha.getMonth() + 1;
+    const anio = fecha.getFullYear();
+    const clave = `${mes}-${anio}`;
+
+    if (!contador[clave]) {
+      contador[clave] = {};
+    }
+
+    if (!contador[clave][partida.ganador]) {
+      contador[clave][partida.ganador] = { victorias: 0, vencidos: new Set() };
+    }
+
+    contador[clave][partida.ganador].victorias++;
+
+    const vencidos = [partida.jugador1, partida.jugador2, partida.jugador3].filter(j => j && j !== partida.ganador);
+    vencidos.forEach(v => contador[clave][partida.ganador].vencidos.add(v));
+  });
+
+  const resultado = [];
+
+  for (const mes in contador) {
+    const jugadores = contador[mes];
+    let maxJugador = null;
+    let maxVictorias = -1;
+    let maxVencidos = -1;
+
+    for (const jugador in jugadores) {
+      const { victorias, vencidos } = jugadores[jugador];
+
+      if (victorias > maxVictorias) {
+        maxJugador = jugador;
+        maxVictorias = victorias;
+        maxVencidos = vencidos.size;
+      } else if (victorias === maxVictorias) {
+        if (vencidos.size > maxVencidos) {
+          maxJugador = jugador;
+          maxVencidos = vencidos.size;
+        }
+      }
+    }
+
+    resultado.push({
+      mes: parseInt(mes.split("-")[0]),    // solo el número de mes
+      anio: parseInt(mes.split("-")[1]),   // el año
+      ganador: maxJugador,
+      victorias: maxVictorias
+    });
+  }
+
+  return resultado;
+}
+
+
+
+
+//Cambiar Seccion del main
+window.mostrarSeccion = function(id) {
+  // Mostrar sección inferior
+  const secciones = document.querySelectorAll('[id^="seccion-"]');
+  secciones.forEach(sec => sec.classList.add("hidden"));
+  const activa = document.getElementById(`seccion-${id}`);
+  if (activa) activa.classList.remove("hidden");
+
+  // Restaurar sección superior 1
+  const superiores = document.querySelectorAll('[id^="seccionSuperior"]');
+  superiores.forEach(s => s.classList.add("hidden"));
+  const superior1 = document.getElementById("seccionSuperior1");
+  if (superior1) superior1.classList.remove("hidden");
+
+  // Estilo visual en menú
+  document.querySelectorAll(".item-menu").forEach(el => {
+    el.classList.remove("bg-[#04D7FF]");
+  });
+
+  const activo = document.querySelector(`[data-seccion="${id}"]`);
+  if (activo) activo.classList.add("bg-[#04D7FF]");
+};
+
+
+window.cambiarSeccionSuperior = function(id, elemento) {
+  const secciones = document.querySelectorAll('[id^="seccionSuperior"]');
+  secciones.forEach(sec => sec.classList.add("hidden"));
+
+  const activa = document.getElementById(id);
+  if (activa) activa.classList.remove("hidden");
+
+  document.querySelectorAll(".item-menu").forEach(el => {
+    el.classList.remove("bg-[#04D7FF]");
+  });
+
+  if (elemento) {
+    elemento.classList.add("bg-[#04D7FF]");
+  }
+};
 
 
 // ------------------------------

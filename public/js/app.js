@@ -111,18 +111,26 @@ window.agregarPartida = () => {
     return;
   }
 
+  const fechaRaw = document.getElementById("fecha").value; // dd/mm/yyyy
+  const [dia, mes, anio] = fechaRaw.split("/");
+  const fechaISO = new Date(`${anio}-${mes}-${dia}`).toISOString();
+
+  const timestamp = Date.now();
+  const idGenerado = `partida${timestamp}`;
+  
   const nuevaPartida = {
-    fecha: document.getElementById("fecha").value,
+    fecha: fechaISO,
     jugador1: jugadoresSeleccionados[0] || null,
     jugador2: jugadoresSeleccionados[1] || null,
     jugador3: jugadoresSeleccionados[2] || null,
     ganador: ganadorSeleccionado
   };
 
-  push(partidasRef, nuevaPartida);
+  set(ref(db, `partidas/${idGenerado}`), nuevaPartida);
   document.getElementById("formulario").reset();
   actualizarGanador();
 };
+
 
 // Eliminar partida
 window.eliminarPartida = (id) => {
