@@ -314,30 +314,28 @@ function ganadorPorMesSeparado(lista) {
 }
 
 
-
-
-//Cambiar Seccion del main
+// Cambiar Sección del main (conservar estructura general)
 window.mostrarSeccion = function(id) {
-  // Mostrar sección inferior
-  const secciones = document.querySelectorAll('[id^="seccion-"]');
-  secciones.forEach(sec => sec.classList.add("hidden"));
+  // Ocultar todas las secciones inferiores
+  document.querySelectorAll('[id^="seccion-"]').forEach(sec => sec.classList.add("hidden"));
+  
+  // Mostrar la sección inferior activa
   const activa = document.getElementById(`seccion-${id}`);
   if (activa) activa.classList.remove("hidden");
 
-  // Restaurar sección superior 1
-  const superiores = document.querySelectorAll('[id^="seccionSuperior"]');
-  superiores.forEach(s => s.classList.add("hidden"));
+  // Siempre mostrar secciónSuperior1 (el banner superior)
+  document.querySelectorAll('[id^="seccionSuperior"]').forEach(sup => sup.classList.add("hidden"));
   const superior1 = document.getElementById("seccionSuperior1");
   if (superior1) superior1.classList.remove("hidden");
 
-  // Estilo visual en menú
-  document.querySelectorAll(".item-menu").forEach(el => {
-    el.classList.remove("bg-[#04D7FF]");
-  });
-
-  const activo = document.querySelector(`[data-seccion="${id}"]`);
-  if (activo) activo.classList.add("bg-[#04D7FF]");
+  // Cambiar color activo del menú
+  document.querySelectorAll(".item-menu").forEach(el => el.classList.remove("bg-[#04D7FF]"));
+  
+  const activoMenu = document.querySelector(`[data-seccion="${id}"]`);
+  if (activoMenu) activoMenu.classList.add("bg-[#04D7FF]");
 };
+
+
 
 
 window.cambiarSeccionSuperior = function(id, elemento) {

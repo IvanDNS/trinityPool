@@ -3,6 +3,7 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.10/firebase
 import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
 import { set } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyCvAkjnBWvfNnDyzistVBFP2mZcymrRRQo",
   authDomain: "trinity-pool.firebaseapp.com",
