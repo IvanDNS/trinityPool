@@ -7,17 +7,38 @@ import "../styles/global.css";
   <meta charset="UTF-8" />
   <title>Partidas de Pool</title>
   <script type="module" src="/js/app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js"></script>
 </head>
 <body class="bg-gray-100 text-gray-800 p-6">
   <div class="max-w-4xl mx-auto">
     <h1 class="text-3xl font-bold mb-6">🎱 Registro de Partidas de Pool</h1>
 
-    <form id="formulario" class="bg-white p-4 rounded shadow mb-6" onsubmit="event.preventDefault(); agregarPartida();">
+    <!-- login -->
+    <div id="loginContainer" class="bg-white p-4 rounded shadow mb-6">
+      <h2 class="text-xl font-semibold mb-2">Iniciar sesión</h2>
+      <form id="loginForm" class="space-y-4">
+        <div>
+          <label class="block font-semibold">Correo electrónico</label>
+          <input id="email" type="email" required class="w-full border p-2 rounded" />
+        </div>
+        <div>
+          <label class="block font-semibold">Contraseña</label>
+          <input id="password" type="password" required class="w-full border p-2 rounded" />
+        </div>
+        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+          Iniciar sesión
+        </button>
+      </form>
+      <p id="loginError" class="text-red-600 mt-2 hidden"></p>
+    </div>
+
+    <!-- Contenido  -->
+    <div id="contenido" class="hidden">
+      <form id="formulario" class="bg-white p-4 rounded shadow mb-6" onsubmit="event.preventDefault(); agregarPartida();">
         <div class="mb-4">
           <label class="block font-semibold mb-1">Fecha</label>
           <input id="fecha" type="date" required class="w-full border p-2 rounded" />
         </div>
-      
         <div class="mb-4">
           <label class="block font-semibold mb-2">Selecciona los Jugadores (máx 3)</label>
           <div id="jugadoresCheckboxes" class="flex flex-col gap-2">
@@ -26,37 +47,34 @@ import "../styles/global.css";
             <label><input type="checkbox" name="jugador" value="Yuri" class="mr-2 jugadorCheck">Yuri</label>
           </div>
         </div>
-      
         <div class="mb-4">
           <label class="block font-semibold mb-1">Ganador</label>
           <select id="ganador" required class="w-full border p-2 rounded">
             <option disabled selected>Selecciona un ganador</option>
           </select>
         </div>
-      
         <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Agregar partida</button>
       </form>
+
+      <table class="w-full bg-white rounded shadow text-sm">
+        <thead>
+          <tr class="bg-blue-200 text-left">
+            <th class="px-4 py-2">Fecha</th>
+            <th class="px-4 py-2">Jugador 1</th>
+            <th class="px-4 py-2">Jugador 2</th>
+            <th class="px-4 py-2">Jugador 3</th>
+            <th class="px-4 py-2">Ganador</th>
+            <th class="px-4 py-2">Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tablaPartidas"></tbody>
+      </table>
+
+      <button onclick="cerrarSesion()" class="mt-4 bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500">
+        Cerrar sesión
+      </button>
       
-      
-
-
-    <table class="w-full bg-white rounded shadow text-sm">
-      <thead>
-        <tr class="bg-blue-200 text-left">
-          <th class="px-4 py-2">Fecha</th>
-          <th class="px-4 py-2">Jugador 1</th>
-          <th class="px-4 py-2">Jugador 2</th>
-          <th class="px-4 py-2">Jugador 3</th>
-          <th class="px-4 py-2">Ganador</th>
-          <th class="px-4 py-2">Acciones</th>
-        </tr>
-      </thead>
-      <tbody id="tablaPartidas"></tbody>
-    </table>
-
-
+    </div>
   </div>
-
-
 </body>
 </html>

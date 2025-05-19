@@ -2,6 +2,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebas
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics.js";
 import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
 import { set } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+
 
 
 const firebaseConfig = {
@@ -167,3 +169,41 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// LOGIN
+
+const auth = getAuth(app);
+
+// Función para iniciar sesión
+const loginForm = document.getElementById("loginForm");
+loginForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      document.getElementById("loginContainer").classList.add("hidden");
+      document.getElementById("contenido").classList.remove("hidden");
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      document.getElementById("loginError").textContent = "Error: " + errorMessage;
+      document.getElementById("loginError").classList.remove("hidden");
+    });
+});
+
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    document.getElementById("loginContainer").classList.add("hidden");
+    document.getElementById("contenido").classList.remove("hidden");
+  } else {
+    document.getElementById("contenido").classList.add("hidden");
+    document.getElementById("loginContainer").classList.remove("hidden");
+  }
+});
+
+window.cerrarSesion = () => {
+  signOut(auth);
+};
