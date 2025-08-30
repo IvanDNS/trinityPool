@@ -65,7 +65,7 @@ import "../styles/global.css";
             <li onclick="mostrarSeccion('galeria')" class="item-menu flex items-center gap-2 p-1 rounded-lg cursor-pointer" data-seccion="galeria"><i class="fas fa-camera"></i> Galeria</li>
             <li onclick="cambiarSeccionSuperior('seccionSuperior2', this)" class="item-menu flex items-center gap-2 p-2 rounded-lg cursor-pointer tracking-tighter"><i class="fas fa-trophy"></i> Hall de la fama</li>
 
-            <li class="flex items-center gap-2 p-1 rounded-lg cursor-pointer"><i class="fas fa-cogs"></i> Configuración</li>
+            <li onclick="window.open('/admin', '_blank')" class="flex items-center gap-2 p-1 rounded-lg cursor-pointer"><i class="fas fa-cogs"></i> Configuración</li>
         </ul>
       </aside>
   
@@ -153,13 +153,55 @@ import "../styles/global.css";
                 </div>
             </section>
 
-             <!-- SECCION GALERIA -->
-            <section id="seccion-galeria" class="hidden animate-fade-right">
-              <div class="flex items-center justify-between mb-4">
-                <h2 class="text-2xl font-raj text-blue-400 opacity-80">Galeria</h2>
+<!-- SECCION GALERIA -->
+<section id="seccion-galeria" class="hidden animate-fade-right h-[900px] overflow-y-auto">
+  <div class="flex items-center justify-between mb-2">
+    <h2 class="text-xl font-raj text-blue-400 opacity-80">Galería</h2>
+  </div>
 
-              </div>
-            </section>
+  <!-- Contenedor vertical -->
+  <div class="flex flex-col gap-3 pr-2">
+    <!-- Imagen -->
+    <div class="rounded-xl overflow-hidden shadow-md">
+      <img src="/img/galeria/1.webp" alt="Imagen 1" class="w-full object-cover">
+    </div>
+    <!-- Imagen -->
+    <div class="rounded-xl overflow-hidden shadow-md">
+      <img src="/img/galeria/2.webp" alt="Imagen 1" class="w-full object-cover">
+    </div>
+        <!-- Imagen -->
+    <div class="rounded-xl overflow-hidden shadow-md">
+      <img src="/img/galeria/3.webp" alt="Imagen 1" class="w-full object-cover">
+    </div>
+        <!-- Imagen -->
+    <div class="rounded-xl overflow-hidden shadow-md">
+      <img src="/img/galeria/4.webp" alt="Imagen 1" class="w-full object-cover">
+    </div>
+        <!-- Imagen -->
+    <div class="rounded-xl overflow-hidden shadow-md">
+      <img src="/img/galeria/5.webp" alt="Imagen 1" class="w-full object-cover">
+    </div>
+        <!-- Imagen -->
+    <div class="rounded-xl overflow-hidden shadow-md">
+      <img src="/img/galeria/6.webp" alt="Imagen 1" class="w-full object-cover">
+    </div>
+        <!-- Imagen -->
+    <div class="rounded-xl overflow-hidden shadow-md">
+      <img src="/img/galeria/7.webp" alt="Imagen 1" class="w-full object-cover">
+    </div>
+        <!-- Imagen -->
+    <div class="rounded-xl overflow-hidden shadow-md">
+      <img src="/img/galeria/8.webp" alt="Imagen 1" class="w-full object-cover">
+    </div>
+        <!-- Imagen -->
+    <div class="rounded-xl overflow-hidden shadow-md">
+      <img src="/img/galeria/9.webp" alt="Imagen 1" class="w-full object-cover">
+    </div>
+
+  </div>
+</section>
+
+
 
             </section>
   
@@ -440,7 +482,7 @@ import "../styles/global.css";
 
 <!-- HALL DE LA FAMA -->
       <section id="seccionSuperior2" class="hidden animate-fade-right flex-1 h-[1100px] relative p-8 overflow-hidden">
-        <div class="relative group w-full h-80 bg-[url('/img/billar.png')] bg-cover bg-center rounded-lg overflow-hidden">
+        <div class="relative group w-full h-80 bg-[url('/img/billar.webp')] bg-cover bg-center rounded-lg overflow-hidden">
           <div class="absolute inset-0 bg-black opacity-40 z-0"></div>
           <img
             src="/img/taco.png"
@@ -518,7 +560,7 @@ import "../styles/global.css";
             <!-- Junio -->
             <div class="shadow-xl overflow-hidden transform hover:scale-105 transition duration-300 w-full">
               <div class="relative">
-                <img id="trofeo-3-2025" src="/img/trofeo/trofeo-vacio.png" class="object-cover flex justify-center w-[39%] mx-auto mt-[38%] absolute inset-0 z-0" />
+                <img id="trofeo-6-2025" src="/img/trofeo/trofeo-vacio.png" class="object-cover flex justify-center w-[39%] mx-auto mt-[38%] absolute inset-0 z-0" />
                 <img src="/img/frame.png" class="object-contain w-full mx-auto relative z-10" />
                 <div class="absolute inset-0 flex flex-col items-center justify-end text-white px-2 text-center z-20">
                   <h3 class="text-xl font-bold text-yellow-400 drop-shadow mb-[46%]">Junio</h3>
@@ -526,13 +568,13 @@ import "../styles/global.css";
               </div>
               <div class="bg-gray-800 text-center py-2">
                 <h3 class="text-lg font-bold text-yellow-400">Ganador</h3>
-                <p id="victorias-3-2025" class="text-sm text-gray-300"></p>
+                <p id="victorias-6-2025" class="text-sm text-gray-300"></p>
               </div>
             </div>
             <!-- Julio -->
             <div class="shadow-xl overflow-hidden transform hover:scale-105 transition duration-300 w-full">
               <div class="relative">
-                <img id="trofeo-3-2025" src="/img/trofeo/trofeo-vacio.png" class="object-cover flex justify-center w-[39%] mx-auto mt-[38%] absolute inset-0 z-0" />
+                <img id="" src="/img/trofeo/trofeo-fatyka.png" class="object-cover flex justify-center w-[39%] mx-auto mt-[38%] absolute inset-0 z-0" />
                 <img src="/img/frame.png" class="object-contain w-full mx-auto relative z-10" />
                 <div class="absolute inset-0 flex flex-col items-center justify-end text-white px-2 text-center z-20">
                   <h3 class="text-xl font-bold text-yellow-400 drop-shadow mb-[46%]">Julio</h3>
@@ -540,7 +582,77 @@ import "../styles/global.css";
               </div>
               <div class="bg-gray-800 text-center py-2">
                 <h3 class="text-lg font-bold text-yellow-400">Ganador</h3>
-                <p id="victorias-3-2025" class="text-sm text-gray-300"></p>
+                <p id="" class="text-sm text-gray-300">Fatyka ganó 3 veces</p>
+              </div>
+            </div>
+            <!-- Agosto -->
+            <div class="shadow-xl overflow-hidden transform hover:scale-105 transition duration-300 w-full">
+              <div class="relative">
+                <img id="trofeo-8-2025" src="/img/trofeo/trofeo-vacio.png" class="object-cover flex justify-center w-[39%] mx-auto mt-[38%] absolute inset-0 z-0" />
+                <img src="/img/frame.png" class="object-contain w-full mx-auto relative z-10" />
+                <div class="absolute inset-0 flex flex-col items-center justify-end text-white px-2 text-center z-20">
+                  <h3 class="text-xl font-bold text-yellow-400 drop-shadow mb-[46%]">Agosto</h3>
+                </div>
+              </div>
+              <div class="bg-gray-800 text-center py-2">
+                <h3 class="text-lg font-bold text-yellow-400">Ganador</h3>
+                <p id="victorias-8-2025" class="text-sm text-gray-300"></p>
+              </div>
+            </div>
+            <!-- Septiembre -->
+            <div class="shadow-xl overflow-hidden transform hover:scale-105 transition duration-300 w-full">
+              <div class="relative">
+                <img id="trofeo-9-2025" src="/img/trofeo/trofeo-vacio.png" class="object-cover flex justify-center w-[39%] mx-auto mt-[38%] absolute inset-0 z-0" />
+                <img src="/img/frame.png" class="object-contain w-full mx-auto relative z-10" />
+                <div class="absolute inset-0 flex flex-col items-center justify-end text-white px-2 text-center z-20">
+                  <h3 class="text-xl font-bold text-yellow-400 drop-shadow mb-[46%]">Sepiembre</h3>
+                </div>
+              </div>
+              <div class="bg-gray-800 text-center py-2">
+                <h3 class="text-lg font-bold text-yellow-400">Ganador</h3>
+                <p id="victorias-9-2025" class="text-sm text-gray-300"></p>
+              </div>
+            </div>
+            <!-- Octubre -->
+            <div class="shadow-xl overflow-hidden transform hover:scale-105 transition duration-300 w-full">
+              <div class="relative">
+                <img id="trofeo-10-2025" src="/img/trofeo/trofeo-vacio.png" class="object-cover flex justify-center w-[39%] mx-auto mt-[38%] absolute inset-0 z-0" />
+                <img src="/img/frame.png" class="object-contain w-full mx-auto relative z-10" />
+                <div class="absolute inset-0 flex flex-col items-center justify-end text-white px-2 text-center z-20">
+                  <h3 class="text-xl font-bold text-yellow-400 drop-shadow mb-[46%]">Octubre</h3>
+                </div>
+              </div>
+              <div class="bg-gray-800 text-center py-2">
+                <h3 class="text-lg font-bold text-yellow-400">Ganador</h3>
+                <p id="victorias-10-2025" class="text-sm text-gray-300"></p>
+              </div>
+            </div>
+            <!-- Noviembre -->
+            <div class="shadow-xl overflow-hidden transform hover:scale-105 transition duration-300 w-full">
+              <div class="relative">
+                <img id="trofeo-11-2025" src="/img/trofeo/trofeo-vacio.png" class="object-cover flex justify-center w-[39%] mx-auto mt-[38%] absolute inset-0 z-0" />
+                <img src="/img/frame.png" class="object-contain w-full mx-auto relative z-10" />
+                <div class="absolute inset-0 flex flex-col items-center justify-end text-white px-2 text-center z-20">
+                  <h3 class="text-xl font-bold text-yellow-400 drop-shadow mb-[46%]">Noviembre</h3>
+                </div>
+              </div>
+              <div class="bg-gray-800 text-center py-2">
+                <h3 class="text-lg font-bold text-yellow-400">Ganador</h3>
+                <p id="victorias-11-2025" class="text-sm text-gray-300"></p>
+              </div>
+            </div>
+            <!-- Diciembre -->
+            <div class="shadow-xl overflow-hidden transform hover:scale-105 transition duration-300 w-full">
+              <div class="relative">
+                <img id="trofeo-12-2025" src="/img/trofeo/trofeo-vacio.png" class="object-cover flex justify-center w-[39%] mx-auto mt-[38%] absolute inset-0 z-0" />
+                <img src="/img/frame.png" class="object-contain w-full mx-auto relative z-10" />
+                <div class="absolute inset-0 flex flex-col items-center justify-end text-white px-2 text-center z-20">
+                  <h3 class="text-xl font-bold text-yellow-400 drop-shadow mb-[46%]">Diciembre</h3>
+                </div>
+              </div>
+              <div class="bg-gray-800 text-center py-2">
+                <h3 class="text-lg font-bold text-yellow-400">Ganador</h3>
+                <p id="victorias-12-2025" class="text-sm text-gray-300"></p>
               </div>
             </div>
                     

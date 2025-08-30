@@ -207,3 +207,4 @@ onAuthStateChanged(auth, (user) => {
 window.cerrarSesion = () => {
   signOut(auth);
 };
+ 
